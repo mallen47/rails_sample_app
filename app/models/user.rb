@@ -17,6 +17,12 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, User.digest(remember_token))
   end
   
+  # Return true if the given token matches the digest
+  def authenticated?(remember_token)
+    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  end
+  
+  # class methods
   class << self
     # Returns the hash digest of the given string.
     def digest(string)
