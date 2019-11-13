@@ -6,6 +6,11 @@ class UserTest < ActiveSupport::TestCase
                      password: "foobar", password_confirmation: "foobar")
   end
   
+  
+  test "authenticated? should return false for user with nil digest" do
+    assert_not @user.authenticated?('')
+  end
+  
   test "should be valid" do
     assert @user.valid?
   end
