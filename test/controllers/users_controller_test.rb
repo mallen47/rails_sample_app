@@ -7,6 +7,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @other_user = users(:Dave)
   end
   
+  test "should redirect index when not logged in" do
+    # get the users index: $rails routes shows this as users_path or just users
+    # users GET  /users(.:format)  users#index
+    get users_path
+    assert_redirected_to login_url
+  end
+  
   test "should redirect edit when logged in as wrong user" do
     log_in_as(@other_user)
     get edit_user_path(@user)
