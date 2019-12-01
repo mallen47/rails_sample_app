@@ -48,7 +48,6 @@ module SessionsHelper
     end
   end
   
-  # 
   def current_user?(user)
     # &. safe navigation operator; replaces: user && user == current_user
     user&. == current_user
