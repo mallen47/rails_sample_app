@@ -9,12 +9,18 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
   
   test "users index as admin should include pagination and delete links" do
     log_in_as(@admin)  # users index is protected so we need to be logged in
+    # The code below is from execise 11.3.3 #3. It should probably be in its
+    # own test so as to not add too much to this test, but it is intended to 
+    # validate that only active users are displayed on the index page
+    first_page_of_users = User.paginate(page: 1)
+    first_page_of_users.first.toggle!(:activated)
     get users_path
     assert_template 'users/index'  # make sure we are on the users index page
     assert_select 'div.pagination', count: 2 # check pagination links
-    first_page_of_users = User.paginate(page: 1)
     # check that users are present as expected
-    first_page_of_users.each do |user|
+    # first_page_of_users.each do |user|
+    assigns(:users).each do |user|
+      assert user.activated?
       assert_select "a[href=?]", user_path(user), text: user.name
       unless user == @admin
         assert_select "a[href=?]", user_path(user), text: "delete"
