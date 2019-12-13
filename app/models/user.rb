@@ -31,11 +31,6 @@ class User < ApplicationRecord
     BCrypt::Password.new(digest).is_password?(token)
   end
   
-  # Send activatino email
-  def send_activation_email
-    UserMailer.account_activation(self).deliver_now
-  end
-  
   # Activates an account
   def activate
     # update_attribute(:activated, true)
@@ -51,9 +46,20 @@ class User < ApplicationRecord
     update_attribute(:reset_sent_at, Time.zone.now)
   end
   
+  
+  # Send activation email
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+  end
+  
   # Send the password reset email
   def send_password_reset_email
     UserMailer.password_reset(self).deliver_now
+  end
+  
+  # Returns true if password reset has expired
+  def password_reset_expired?
+    reset_sent_at < 2.hours.ago
   end
   
   # class methods
