@@ -42,8 +42,11 @@ class User < ApplicationRecord
   # Set the password reset attributes
   def create_reset_digest
     self.reset_token = User.new_token
-    update_attribute(:reset_digest, User.digest(reset_token))
-    update_attribute(:reset_sent_at, Time.zone.now)
+    # Ex 12.3.3.1 replaces 2 update_attribute calls w/ 1 update_columns call
+    update_columns(reset_digest: User.digest(reset_token), 
+                                 reset_sent_at: Time.zone.now)
+    # update_attribute(:reset_digest, User.digest(reset_token))
+    # update_attribute(:reset_sent_at, Time.zone.now)
   end
   
   
