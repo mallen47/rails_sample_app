@@ -1,0 +1,46 @@
+peanuts:
+  content: "I want some peanuts."
+  created_at: <%= 10.minutes.ago %>
+  user: Bill
+
+tau_manifesto:
+  content: "Check out the @tauday site by @mhartl: https://tauday.com"
+  created_at: <%= 3.years.ago %>
+  user: Bill
+
+cat_video:
+  content: "Sad cats are sad: https://youtu.be/PKffm2uI4dk"
+  created_at: <%= 2.hours.ago %>
+  user: Bill
+
+most_recent:
+  content: "Writing a short test"
+  created_at: <%= Time.zone.now %>
+  user: Bill
+  
+man:
+  content: "You never leave a man behind!"
+  created_at: <%= 2.years.ago %>
+  user: Bob
+
+set:
+  content: "We keep going until we retire or get caught. Either way we're set for life."
+  created_at: <%= 3.days.ago %>
+  user: Dave
+
+funny:
+  content: "Not unless round is funny."
+  created_at: <%= 10.minutes.ago %>
+  user: Dave
+
+huggies:
+  content: "I'll be taking these here huggies and whatever cash you got."
+  created_at: <%= 4.hours.ago %>
+  user: Bob
+  
+<% 30.times do |n| %>
+micropost_<%= n %>:
+  content: <%= Faker::Lorem.sentence(word_count: 5) %>
+  created_at: <%= 42.days.ago %>
+  user: Bill
+<% end %>
