@@ -3,7 +3,6 @@ Rails.application.configure do
   
   # Store uploaded files on Amazon AWS.
   config.active_storage.service = :amazon
-  # making sure images persist between deploys. Delete me.
 
   # Code is not reloaded between requests.
   config.cache_classes = true
