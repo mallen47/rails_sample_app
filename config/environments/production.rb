@@ -1,8 +1,5 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  
-  # Store uploaded files on Amazon AWS.
-  config.active_storage.service = :amazon
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -122,4 +119,7 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+  
+  # Store uploaded files on Amazon AWS.
+  config.active_storage.service = :amazon
 end
