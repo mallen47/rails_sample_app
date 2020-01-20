@@ -78,7 +78,7 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
   
-  test "associated microposts should be destroed" do
+  test "associated microposts should be destroyed" do
     @user.save
     @user.microposts.create!(content: "lorem ispum")
     assert_difference 'Micropost.count', -1 do
@@ -86,5 +86,14 @@ class UserTest < ActiveSupport::TestCase
     end
   end
   
+  test "should follow and unfollow a user" do
+    bill = users(:Bill)
+    dave = users(:Dave)
+    assert_not bill.following?(dave)
+    bill.follow(dave)
+    assert bill.following?(dave)
+    bill.unfollow(dave)
+    assert_not bill.following?(dave)
+  end
   
 end
