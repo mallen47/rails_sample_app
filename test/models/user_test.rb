@@ -110,7 +110,7 @@ class UserTest < ActiveSupport::TestCase
       assert bill.feed.include?(post_self)
     end
     # Posts from unfollowed users
-    archer.microposts.each do |post_unfollowed|
+    fred.microposts.each do |post_unfollowed|
       assert_not bill.feed.include?(post_unfollowed)
     end
   end
